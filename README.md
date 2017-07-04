@@ -1,2 +1,2 @@
 # Data-Structures-and-Algorithms
-Contains Implementation of Various DS and Alg's in C++
+Contains Implementation of Various Data Structures and Algorithms in C++
