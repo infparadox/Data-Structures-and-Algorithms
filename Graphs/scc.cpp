@@ -5,12 +5,12 @@ typedef long long int ll;
 #define size 1000000
 bool vis[size];
 
-void print(vector< list<ll> >&g,ll v)
+void print(vector< list<ll> >&G,ll v)
 {
 	for(ll i=0;i<v;i++)
 	{
 		cout << i ;
-		for(auto it=g[i].begin();it!=g[i].end();it++)
+		for(auto it=G[i].begin();it!=G[i].end();it++)
 			cout << "-->" << *it ;
 		cout << "\n";
 	}
@@ -18,55 +18,55 @@ void print(vector< list<ll> >&g,ll v)
 
 stack<ll>S;
 
-void toposort(vector< list<ll> >&g,ll s)
+void toposort(vector< list<ll> >&G,ll s)
 {
 	vis[s]=1;
-	for(auto it=g[s].begin();it!=g[s].end();it++)
+	for(auto it=G[s].begin();it!=G[s].end();it++)
 	{
 		if(!vis[*it])
-			toposort(g,*it);
+			toposort(G,*it);
 	}
 	S.push(s);
 }
 
-void dfs(vector< list<ll> >&g,ll s)
+void dfs(vector< list<ll> >&G,ll s)
 {
 	vis[s]=1;
 	cout << s << " ";
-	for(auto it=g[s].begin();it!=g[s].end();it++)
+	for(auto it=G[s].begin();it!=G[s].end();it++)
 	{
 		if(!vis[*it])
-			dfs(g,*it);
+			dfs(G,*it);
 	}
 }
 
 int main()
 {
 	ios::sync_with_stdio(false);
-	ll v,e,i;
-	cin >> v >> e;
-	vector< list<ll> >g(v);
-	vector< list<ll> >rev(v);
-	for(i=0;i<v;i++)
+	ll V,E,i;
+	cin >> V >> E;
+	vector< list<ll> >G(V);
+	vector< list<ll> >rev(V);
+	for(i=0;i<V;i++)
 	{
-		g[i].clear();
+		G[i].clear();
 		rev[i].clear();
 		vis[i]=0;
 	}
-	for(i=0;i<e;i++)
+	for(i=0;i<E;i++)
 	{
 		ll m,n;
 		cin >> m >> n;
-		g[m].push_back(n);
+		G[m].push_back(n);
 		rev[n].push_back(m);
 	}
-	print(g,v);
-	for(i=0;i<v;i++)
+	print(G,V);
+	for(i=0;i<V;i++)
 	{
 		if(!vis[i])
-			toposort(g,i);
+			toposort(G,i);
 	}
-	for(i=0;i<v;i++)
+	for(i=0;i<V;i++)
 		vis[i]=0;
 	while(!S.empty())
 	{

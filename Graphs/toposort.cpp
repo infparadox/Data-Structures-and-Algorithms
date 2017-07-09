@@ -5,13 +5,13 @@ typedef long long int ll;
 #define size 1000000
 bool vis[size];
 
-void print(vector< list<ll> >&g,ll v)
+void print(vector< list<ll> >&G,ll V)
 {
 	ll i;
-	for(i=0;i<v;i++)
+	for(i=0;i<V;i++)
 	{
 		cout << i ;
-		for(auto it=g[i].begin();it!=g[i].end();it++)
+		for(auto it=G[i].begin();it!=G[i].end();it++)
 			cout << "-->" << *it ;
 		cout << "\n";
 	}
@@ -19,13 +19,13 @@ void print(vector< list<ll> >&g,ll v)
 
 stack<ll>S;
 
-void dfs(vector< list<ll> >&g,ll s)
+void dfs(vector< list<ll> >&G,ll s)
 {
 	vis[s]=1;
-	for(auto it=g[s].begin();it!=g[s].end();it++)
+	for(auto it=G[s].begin();it!=G[s].end();it++)
 	{
 		if(!vis[*it])
-			dfs(g,*it);
+			dfs(G,*it);
 	}
 	S.push(s);
 }
@@ -33,26 +33,27 @@ void dfs(vector< list<ll> >&g,ll s)
 int main()
 {
 	ios::sync_with_stdio(false);
-	ll v,e,i;
-	cin >> v >> e;
-	vector< list<ll> >g(v);
-	for(i=0;i<v;i++)
+	ll V,E,i;
+	cin >> V >> E;
+	vector< list<ll> >G(V);
+	for(i=0;i<V;i++)
 	{
-		g[i].clear();
+		G[i].clear();
 		vis[i]=0;
 	}
-	for(i=0;i<e;i++)
+	for(i=0;i<E;i++)
 	{
 		ll m,n;
 		cin >> m >> n;
-		g[m].push_back(n);
+		G[m].push_back(n);
 	}
-	print(g,v);
-	for(i=0;i<v;i++)
+	print(G,V);
+	for(i=0;i<V;i++)
 	{
 		if(!vis[i])
-			dfs(g,i);
+			dfs(G,i);
 	}
+	cout << "TOPOSORT ORDER:" ;
 	while(!S.empty())
 	{
 		cout << S.top() << " ";
