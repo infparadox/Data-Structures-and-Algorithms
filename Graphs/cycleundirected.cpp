@@ -19,21 +19,17 @@ void print(vector< list<ll > >&G,ll v)
 bool cycle(vector< list<ll > >&G,ll s, ll p)
 {
 	vis[s]=1;
-	bool fl=0;
 	for(auto it=G[s].begin();it!=G[s].end();it++)
 	{
 		if(!vis[*it])
-			cycle(G,*it,s);
-		else if((*it)!=p)
 		{
-			fl=1;
-			break;
-		}
+			if(cycle(G,*it,s))
+				return 1;
+		}		
+		else if((*it)!=p)
+			return 1;
 	}
-	if(fl)
-		return true;
-	else
-		return false;
+	return 0a;
 }
 
 int main()
