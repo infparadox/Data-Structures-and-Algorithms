@@ -19,27 +19,23 @@ void print(vector< list<ll> >&G,ll V)
 	}
 }
 
-bool fl=0;
-void dfs(vector< list<ll> >&G,ll s)
+bool dfs(vector< list<ll> >&G,ll s)
 {
 	w[s]=0;
 	g[s]=1;
 	for(auto it=G[s].begin();it!=G[s].end();it++)
 	{
 		if(g[*it])
+			return 1;
+		else if(w[*it])
 		{
-			fl=1;
-			break;
-		}
-		if(w[*it])
-		{
-			dfs(G,*it);
-			if(fl)
-				break;
+			if(dfs(G,*it))
+				return 1;
 		}
 	}
 	b[s]=1;
 	g[s]=0;
+	return 0;
 }
 
 
@@ -62,10 +58,17 @@ int main()
 		cin >> m >> n;
 		G[m].push_back(n);
 	}
+	bool fl=0;
 	for(i=0;i<V;i++)
 	{
 		if(w[i])
-			dfs(G,i);
+		{
+			if(dfs(G,i))
+			{
+				fl=1;
+				break;
+			}
+		}
 	}
 	if(fl)
 		cout << "Yes\n";
