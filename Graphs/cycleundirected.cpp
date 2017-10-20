@@ -29,7 +29,7 @@ bool cycle(vector< list<ll > >&G,ll s, ll p)
 		else if((*it)!=p)
 			return 1;
 	}
-	return 0a;
+	return 0;
 }
 
 int main()
