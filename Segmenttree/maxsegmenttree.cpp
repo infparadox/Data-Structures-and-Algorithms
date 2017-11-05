@@ -4,7 +4,7 @@ typedef long long int ll;
 
 ll MIN=INT_MIN;
 
-ll size(ll n)
+ll getsize(ll n)
 {
 	ll ans,y;
 	if(n==1)
@@ -58,7 +58,7 @@ int main()
 	ll a[n],i;
 	for(i=0;i<n;i++)
 		cin >> a[i];
-	x=size(n);
+	x=getsize(n);
 	ll segtree[x];
 	for(i=0;i<x;i++)
 		segtree[i]=MIN;
