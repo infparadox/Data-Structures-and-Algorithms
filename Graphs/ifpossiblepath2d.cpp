@@ -1,49 +1,51 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long int ll;
-#define size 100
-bool vis[size][size];
-ll a[size][size];
 
-bool dfs(ll x,ll y,ll n,ll m,ll dx,ll dy)
-{
-	if(x==(dx) && y==(dy))
-		return 1;
-	if(x<0 || y<0)
-		return 0;
-	if(x>=n || y>=m)
-		return 0;
-	if(vis[x][y])
-		return 0;
-	if(a[x][y]==0)
-		return 0;
-	vis[x][y]=1;
-	if(dfs(x-1,y,n,m,dx,dy))
-		return 1;
-	if(dfs(x+1,y,n,m,dx,dy))
-		return 1;
-	if(dfs(x,y-1,n,m,dx,dy))
-		return 1;
-	if(dfs(x,y+1,n,m,dx,dy))
-		return 1;
-}
+class Solution {
+    public:
+    bool dfs(const vector< vector<int> >matrix, const int x, const int y, int dx, int dy, vector< vector<int> >&vis) {
+        if(!isValid(x, y, matrix.size(), matrix[0].size()) || vis[x][y] || matrix[x][y] == 0)
+            return false;
+        
+        if(x == dx && y == dy) 
+            return true;
+        
+        cout << x << " " << y << "\n";
+        vis[x][y] = true;
+        if( dfs(matrix, x+1, y, dx, dy, vis) ) 
+            return true;
+        if( dfs(matrix, x, y+1, dx, dy, vis) )
+            return true;
+        return false;
+    }
+    
+    private:
+    bool isValid(int x, int y, int m, int n) {
+        if(x>=0 && x<m && y>=0 && y<n) {
+            return true;
+        }
+        return false;
+    }
+};
 
-int main()
-{
-	ios::sync_with_stdio(false);
-	ll n,m,i,j;
-	cin >> n >> m;
-	for(i=0;i<n;i++)
-	{
-		for(j=0;j<m;j++)
-		{
-			cin >> a[i][j];
-			vis[i][j]=0;
-		}
-	}
-	if(dfs(0,0,n,m,n-1,m-1))
-		cout << "Yes\n";
-	else
-		cout << "No\n";
-	return 0;
+int main() {
+    ios::sync_with_stdio(0);
+    int n, m;
+    cin >> n >> m;
+    vector< vector<int> >matrix(n, vector<int>(m));
+    vector< vector<int> >vis(n, vector<int>(m));
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<m ;j++) {
+            cin >> matrix[i][j];
+            vis[i][j] = false;
+        }
+    }
+    Solution solve;
+    if(solve.dfs(matrix, 0, 0, n-1, m-1, vis)) {
+        cout << "Yes\n";
+    } else {
+        cout << "No\n";
+    }
+    
+    return 0;
 }
