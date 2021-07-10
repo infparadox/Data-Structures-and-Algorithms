@@ -33,6 +33,20 @@ class Solution {
             
         }
     }
+    
+    bool doesPathExists(const vector< list<int> >&G, const int src, const int des, vector<bool>&vis) {
+        if(src == des)
+            return true;
+        vis[src] = true;        
+        for(int v : G[src]) {
+            if(!vis[v]) {
+                bool hasPath = doesPathExists(G, v, des, vis);
+                if(hasPath)
+                    return true;
+            }
+        }
+        return false;
+    }
 };
 
 
@@ -60,5 +74,16 @@ int main() {
         cout << i << " :" << level[i] << " ";
     }
     cout << "\n";
+    
+    for(int i=0; i<V; i++) {
+        vis[i] = false;
+    }
+    
+    if(solve.doesPathExists(G, 1, 5, vis)) {
+        cout << "Yes\n";
+    } else {
+        cout << "No\n";
+    }
+    
     return 0;
 }
