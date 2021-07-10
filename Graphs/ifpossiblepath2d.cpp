@@ -3,7 +3,7 @@ using namespace std;
 
 class Solution {
     public:
-    bool dfs(const vector< vector<int> >matrix, const int x, const int y, const int dx, const int dy, vector< vector<int> >&vis) {
+    bool dfs(const vector< vector<int> >&matrix, const int x, const int y, const int dx, const int dy, vector< vector<int> >&vis) {
         if(!isValid(x, y, matrix.size(), matrix[0].size()) || vis[x][y] || matrix[x][y] == 0)
             return false;
         
