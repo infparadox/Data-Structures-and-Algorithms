@@ -20,7 +20,7 @@ class Solution {
     }
     
     private:
-    bool isValid(const int x, cosnt int y, const int m, const int n) {
+    bool isValid(const int x, const int y, const int m, const int n) {
         if(x>=0 && x<m && y>=0 && y<n) {
             return true;
         }
