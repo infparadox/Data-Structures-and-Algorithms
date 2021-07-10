@@ -47,8 +47,21 @@ class Solution {
         }
         return false;
     }
+    
+    void printAllPaths(const vector< list<int> >&G, const int src, const int des, vector<bool>&vis, string path) {
+        if(src == des) {
+            cout << path << "\n";
+            return;
+        }
+        vis[src] = true;        
+        for(int v : G[src]) {
+            if(!vis[v]) {
+                printAllPaths(G, v, des, vis, path + " " + to_string(v));
+            }
+        }
+        vis[src] = false;
+    }
 };
-
 
 int main() {
     ios::sync_with_stdio(0);
@@ -79,11 +92,13 @@ int main() {
         vis[i] = false;
     }
     
+    solve.printAllPaths(G, 0, 3, vis, to_string(0));
+    /*
     if(solve.doesPathExists(G, 1, 5, vis)) {
         cout << "Yes\n";
     } else {
         cout << "No\n";
     }
-    
+    */
     return 0;
 }
